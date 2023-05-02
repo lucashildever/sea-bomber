@@ -5,6 +5,9 @@ using UnityEngine;
 public class BombScript : MonoBehaviour
 {
     public float ExplosionDelay = 5;
+
+    public GameObject ExplosionPrefab;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +27,7 @@ public class BombScript : MonoBehaviour
     }
 
     private void Explode() {
+        Instantiate(ExplosionPrefab, transform.position, ExplosionPrefab.transform.rotation);
         Destroy(gameObject);
     }
 }
