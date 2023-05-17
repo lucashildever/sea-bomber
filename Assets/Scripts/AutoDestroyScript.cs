@@ -5,16 +5,9 @@ using UnityEngine;
 public class AutoDestroyScript : MonoBehaviour
 {
     public float delay = 1f;
-    // Start is called before the first frame update
-    void Start()
-    {
+    
+    void Start() {
         StartCoroutine(BeginSelfDestruction());
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private IEnumerator BeginSelfDestruction() {

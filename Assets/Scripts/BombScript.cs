@@ -8,16 +8,8 @@ public class BombScript : MonoBehaviour
 
     public GameObject ExplosionPrefab;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        StartCoroutine(ExplosionCoroutine()); 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+    void Start() {
+        StartCoroutine(ExplosionCoroutine());
     }
 
     private IEnumerator ExplosionCoroutine() {

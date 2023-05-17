@@ -1,7 +1,7 @@
 using UnityEngine;
 
-public class Idle : State
-{
+public class Idle : State {
+    
     private PlayerController controller;
     public Idle(PlayerController controller) : base("idle") {
         this.controller = controller;
@@ -17,6 +17,11 @@ public class Idle : State
     }
     public override void Update() {
         base.Update();
+
+        if(!controller.movementVector.IsZero()) {
+            controller.stateMachine.ChangeState(controller.walkingState);
+            return;
+        }
 
     }
     public override void LateUpdate() {

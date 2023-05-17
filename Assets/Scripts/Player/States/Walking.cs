@@ -1,7 +1,7 @@
 using UnityEngine;
 
-public class Walking : State
-{
+public class Walking : State {
+
     private PlayerController controller;
     public Walking(PlayerController controller) : base("walking") {
         this.controller = controller;
@@ -18,19 +18,15 @@ public class Walking : State
     public override void Update() {
         base.Update();
 
-        bool isUp = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow);
-        bool isDown = Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow);
-        bool isRight = Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow);
-        bool isLeft = Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow);
-    
-        float movementZ = isUp ? 1 : isDown ? -1 : 0;
-        float movementX = isRight ? 1 : isLeft ? -1 : 0;
+        if(controller.movementVector.IsZero()) {
+            controller.stateMachine.ChangeState(controller.idleState);
+            return;
+        }
 
-        Vector3 movementVector = new Vector3(movementX, 0, movementZ);
+        Vector3 walkVector = new Vector3(controller.movementVector.x, 0, controller.movementVector.y);
+        walkVector *= controller.movementSpeed * Time.deltaTime;
 
-        controller.transform.Translate(movementVector * controller.movementSpeed * Time.deltaTime);
-
-
+        controller.myRigidBody.AddForce(walkVector, ForceMode.Impulse);
     }
     public override void LateUpdate() {
         base.LateUpdate();
